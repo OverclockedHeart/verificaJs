@@ -11,23 +11,20 @@ class UsersList {
 
   //-----------------------------
 
-  login(username, password) {
+  login(username) {
     let user = this.#users.find((u) => u.username === username);
     console.log(user);
 
     if (!user) {
       //non trova username
       window.alert("Error: wrong credentials.");
-    } else if (!dcodeIO.bcrypt.compareSync(password, user.password)) {
-      //la password e l'hash non combaciano
-      window.alert("Error: wrong password.");
     } else {
       window.alert("Login successful!");
       this.userLogged = user;
     }
   }
 
-  signup(username, password, email, desc) {
+  signup(username) {
     let user = new User();
 
     if (this.#users.find((u) => u.username === username) != undefined)
@@ -35,13 +32,11 @@ class UsersList {
         "Error: user already exists, please choose a different username."
       );
     else {
+      /*
       const salt = dcodeIO.bcrypt.genSaltSync(5);
       user.password = dcodeIO.bcrypt.hashSync(password, salt);
-
+    */
       user.username = username;
-      user.email = email;
-      user.desc = desc;
-
       this.#users.push(user);
     }
   }
